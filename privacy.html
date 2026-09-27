@@ -41,14 +41,14 @@
 
 <h3>1. 基本方針</h3>
 <p>1分筋トレ討伐（以下「本アプリ」）には、アカウント登録も開発者のサーバーもありません。氏名・メールアドレス・電話番号など、あなたを直接特定できる情報を求めません。</p>
-<p>本アプリが端末の外へ送るのは、次の3つだけです。</p>
+<p>本アプリが端末の外とやり取りするのは、次の3つだけです。</p>
 <ul>
   <li>あなたが同意した場合の、使い方の記録（Firebase Analytics。下記「3」）</li>
-  <li>あなたが「ランキングに公開する」をオンにした場合の、ランキングの記録（Game Center。下記「4」）</li>
-  <li>購入と復元の手続き（Apple の App Store。下記「5」）</li>
+  <li>ランキングの画面を開いた時などの Game Center へのサインインと、「ランキングに公開する」をオンにした場合のランキングの記録（Game Center。下記「4」）</li>
+  <li>購入・復元の手続きと、購入の状態・商品の価格・App Store の地域の確認（Apple の App Store。下記「5」）</li>
 </ul>
 
-<h3>2. 端末の中にだけ保存するもの</h3>
+<h3>2. 端末の中に保存するもの</h3>
 <ul>
   <li>戦いの記録（日付・種目・数えた回数・プランクの秒数・勝ったかどうか）</li>
   <li>進み具合（地域とステージ・GOLD・装備・討伐数・レベル・称号・継続日数）</li>
@@ -56,7 +56,7 @@
   <li>設定（お知らせの時刻・音・腕立て伏せの形など）</li>
   <li>購入の状態</li>
 </ul>
-<p>これらは端末の中（SwiftData と UserDefaults）にだけ保存し、開発者は見られません。本アプリは iCloud への同期をしません。本アプリを iPhone から削除すると、すべて消えます。iPhone 全体のバックアップ（iCloud バックアップ、またはパソコンへのバックアップ）を使っている場合は、そのバックアップに含まれます。</p>
+<p>これらは端末の中（SwiftData と UserDefaults）にだけ保存し、開発者は見られません。ただし、「ランキングに公開する」をオンにした場合は、進み具合のうち下記「4」の記録を Game Center に送ります。本アプリは iCloud への同期をしません。本アプリを iPhone から削除すると、すべて消えます。iPhone 全体のバックアップ（iCloud バックアップ、またはパソコンへのバックアップ）を使っている場合は、そのバックアップに含まれます。</p>
 
 <h3>3. 使い方の記録（Firebase Analytics）</h3>
 <p>初めて起動した時に「使い方の記録を送りますか」と聞きます。<strong>「送る」を選んだ場合にだけ</strong>、Google の分析サービス Firebase Analytics（Google アナリティクス for Firebase）へ使い方の記録を送ります。「送らない」を選んだ場合は送りません。どちらを選んでも、使える機能は変わりません。</p>
@@ -66,7 +66,7 @@
 <ul>
   <li><code>onboarding_page</code>: はじめの説明の画面を開いたこと（画面の番号。端末ごとに1回）</li>
   <li><code>onboarding_skip</code>: はじめの説明で「今は運動できない」を押したこと（画面の番号。端末ごとに1回）</li>
-  <li><code>onboarding_end</code>: はじめの説明を終えたこと（最後まで進んだか、途中から飛ばしたか。端末ごとに1回）</li>
+  <li><code>onboarding_end</code>: はじめの説明を終えたこと（最初の戦いの後に進んだか、「今は運動できない」の後に進んだか。端末ごとに1回）</li>
   <li><code>first_core_action</code>: 戦いの結果の画面を初めて開いたこと（勝ち負け・種目・回数は含みません。端末ごとに1回）</li>
   <li><code>paywall_shown</code>: 会員の案内の画面を開いたこと（開いたきっかけ: 自動の表示・鍵の付いた地域・週替わりのボス・自分の回数の推移・設定のどれか）</li>
   <li><code>purchase_result</code>: 購入の結果（成功・取り消し・承認待ち・失敗のどれか）</li>
@@ -84,7 +84,7 @@
 
 <h4>送らないもの</h4>
 <ul>
-  <li>種目・回数・秒数・勝ち負け・運動を終えたかどうか</li>
+  <li>1回ごとの戦いの中身（種目・回数・秒数・勝ち負け・最後まで続けたか）</li>
   <li>GOLD・装備・討伐数・レベル・称号・継続日数・ランキングに公開しているかどうか</li>
   <li>アプリで入れた名前・質問への答え・お知らせの時刻</li>
   <li>氏名・連絡先などの個人情報</li>
@@ -92,27 +92,29 @@
 
 <p>目的は、どの画面まで進んだか・どこでやめたかを数えて、使いにくいところを直すことです。広告の配信やターゲティングには使いません。</p>
 <p>送信先は Google LLC で、Firebase のデータ処理の条件に従って扱われます。詳しくは<a href="https://firebase.google.com/support/privacy">Firebase のプライバシーとセキュリティ</a>をご確認ください。</p>
-<p>EEA（欧州経済領域）・英国・スイスの App Store をお使いの場合は送りません。同意の画面も出しません。App Store の地域を確かめられない場合も送りません。</p>
+<p>EEA（欧州経済領域）・英国・スイスの App Store をお使いの場合は送りません。App Store の地域を確かめられない場合も送りません。</p>
 
 <h4>止め方と保持期間</h4>
 <ul>
-  <li>本アプリの設定の「使い方の記録を送る」をオフにすると、それ以降は送りません。端末の中のアプリごとの識別子も作り直します。</li>
-  <li>送信済みの記録は、Google アナリティクスのデータ保持期間（2か月）が過ぎると消えます。オフにしても、送信済みの分がその時点で消えるわけではありません。</li>
-  <li>本アプリを削除した場合も、送信済みの分は同じく保持期間が過ぎると消えます。</li>
+  <li>本アプリの設定の「使い方の記録を送る」をオフにすると、それ以降は送りません。端末の中のアプリごとの識別子も作り直すため、それ以降の記録は前の記録と結びつきません。</li>
+  <li>送信済みの記録のうち、1件ごとの記録（イベント単位・利用者単位のデータ）は、Google アナリティクスのデータ保持期間（2か月）が過ぎると消えます。個人を特定しない集計の数（人数・回数など）は、レポートに残ります。</li>
+  <li>オフにしても、本アプリを削除しても、送信済みの分がその時点で消えるわけではありません。</li>
+  <li>本アプリはアプリごとの識別子を画面に表示せず、開発者は記録がどなたのものか分からないため、送信済みの記録を個別に探して消すことはできません。</li>
 </ul>
 
 <h3>4. ランキング（Game Center）</h3>
-<p>「ランキングに公開する」は、最初はオフです。<strong>オンにした場合にだけ</strong>、Apple の Game Center にサインインし、戦いの結果を閉じた時・称号を替えた時などに、次の記録を送ります。</p>
+<p>ランキングは Apple の Game Center を使います。ランキングの画面を開くと、Game Center へのサインインを求めます（ランキングを見るだけの場合も、サインインが必要です）。本アプリが Game Center にサインインするのは、ランキングの画面を開いた時と、「ランキングに公開する」がオンになっている時だけです。</p>
+<p>「ランキングに公開する」は、最初はオフです。<strong>記録を送るのは、オンにした場合だけです。</strong>オンの間は、Game Center にサインインしていれば、戦いの結果を閉じた時・装備や称号を替えた時などに、次の記録を送ります。</p>
 <ul>
   <li>継続日数（続けて戦った日数）</li>
   <li>着ている装備（6部位）・称号・討伐数（100体単位）・討伐した地域のボスの数（レベルは討伐数から出します）</li>
 </ul>
 <p>公開すると、Game Center のニックネームと上の記録が、ほかの Game Center の利用者に、ランキングとプロフィールで表示されます。アプリで入れた名前は公開しません。</p>
-<p>オフにすると、それ以降は送りません。ランキングは毎週月曜に新しくなるため、すでに載っている記録は次の月曜から表示されなくなります。</p>
-<p>ランキングを見るだけの場合も、Game Center へのサインインが必要です。Game Center は Apple が運営するサービスで、サインインと記録の扱いには <a href="https://www.apple.com/legal/privacy/">Apple のプライバシーポリシー</a>が適用されます。Game Center に送る記録は、Firebase Analytics には送りません。</p>
+<p>オフにすると、それ以降は送りません。ランキングは毎週月曜 0:00（日本時間）に新しくなるため、すでに載っている記録は、次の週のランキングには載りません。</p>
+<p>Game Center は Apple が運営するサービスで、サインインと記録の扱いには <a href="https://www.apple.com/legal/privacy/">Apple のプライバシーポリシー</a>が適用されます。Game Center に送る記録は、Firebase Analytics には送りません。</p>
 
 <h3>5. 購入</h3>
-<p>会員（年額・月額）と永久版の購入・復元は、Apple の App Store（StoreKit）で行います。本アプリと開発者が、カード番号などの支払いの情報や Apple Account のパスワードを受け取ることはありません。購入の状態は、Apple の取引の情報をもとに端末の中で確かめます。</p>
+<p>会員（年額・月額）と永久版の購入・復元は、Apple の App Store（StoreKit）で行います。本アプリと開発者が、カード番号などの支払いの情報や Apple Account のパスワードを受け取ることはありません。購入の状態は、Apple の取引の情報をもとに端末の中で確かめます。そのために、起動した時と本アプリに戻った時に、購入の状態・自動更新の状態・商品の価格を App Store に問い合わせます。また、App Store の地域（国）を、使い方の記録を送ってよい地域かどうかを確かめるために読みます（判定は端末の中で行い、地域の情報を開発者に送ることはありません）。</p>
 
 <h3>6. お知らせ（通知）</h3>
 <p>毎日のお知らせと、無料体験が終わる前のお知らせは、端末の中で予約するローカル通知です。サーバーからは送りません。通知の許可は、お知らせについての説明の画面の後にだけ求めます。許可しなくても使えます。</p>
@@ -130,7 +132,7 @@
 <p>このポリシーを変える場合は、このページを更新し、施行日を書き換えます。</p>
 
 <h3>11. お問い合わせ</h3>
-<p>このポリシーについてのご質問や、送信済みの記録の削除のご依頼は、GitHub Issues で受け付けています。Issues は誰でも読める公開の場所です。氏名・メールアドレスなどの個人情報は書かないでください。</p>
+<p>このポリシーについてのご質問は、GitHub Issues で受け付けています。送信済みの使い方の記録は、上記「3」のとおり個別に探して消すことができないため、送信を止める場合は本アプリの設定でオフにしてください。Issues は誰でも読める公開の場所です。氏名・メールアドレスなどの個人情報は書かないでください。</p>
 <p><a class="cta" href="https://github.com/TodaMasao/tobatsu-legal/issues/new">お問い合わせ（GitHub Issues）</a></p>
 </section>
 
@@ -142,14 +144,14 @@
 <h3>1. Overview</h3>
 <p>Tobatsu (“the App”) has no account registration and no server of its own.
 It never asks for information that directly identifies you, such as your name, email address or phone number.</p>
-<p>The App sends only three kinds of data off your device:</p>
+<p>The App communicates outside your device in only three ways:</p>
 <ul>
   <li>Usage data, only if you agree (Firebase Analytics — see section 3)</li>
-  <li>Ranking data, only if you turn on “Show on the ranking” (Game Center — see section 4)</li>
-  <li>Purchase and restore requests (Apple's App Store — see section 5)</li>
+  <li>Signing in to Game Center, for example when you open the ranking screen, and ranking data, only if you turn on “Show on the ranking” (Game Center — see section 4)</li>
+  <li>Purchase and restore requests, and checks of your purchase state, product prices and App Store storefront (Apple's App Store — see section 5)</li>
 </ul>
 
-<h3>2. What stays on your device</h3>
+<h3>2. What is stored on your device</h3>
 <ul>
   <li>Your fight records (date, exercise, reps counted, plank seconds, whether you won)</li>
   <li>Your progress (regions and stages, GOLD, gear, foes felled, level, title, streak)</li>
@@ -157,7 +159,9 @@ It never asks for information that directly identifies you, such as your name, e
   <li>Your settings (reminder time, sound, push-up form and so on)</li>
   <li>Your purchase state</li>
 </ul>
-<p>All of this is stored only on your device (SwiftData and UserDefaults), and the developer cannot see it. The App does not sync to iCloud.
+<p>All of this is stored only on your device (SwiftData and UserDefaults), and the developer cannot see it.
+If you turn on “Show on the ranking”, however, the part of your progress listed in section 4 is sent to Game Center.
+The App does not sync to iCloud.
 Everything is deleted when you remove the App from your iPhone.
 If you use a full device backup (iCloud Backup or a backup to a computer), this data is included in that backup.</p>
 
@@ -172,7 +176,7 @@ and it does not ask for tracking permission (App Tracking Transparency).</p>
 <ul>
   <li><code>onboarding_page</code>: you opened a screen of the first-run guide (the screen number; once per device)</li>
   <li><code>onboarding_skip</code>: you tapped “I can't exercise right now” in the first-run guide (the screen number; once per device)</li>
-  <li><code>onboarding_end</code>: you finished the first-run guide (whether you went through to the end or skipped part of it; once per device)</li>
+  <li><code>onboarding_end</code>: you finished the first-run guide (whether you got there after your first fight or after “I can't exercise right now”; once per device)</li>
   <li><code>first_core_action</code>: you opened a fight result screen for the first time (no win or loss, exercise or reps; once per device)</li>
   <li><code>paywall_shown</code>: you opened the membership screen (what opened it: shown automatically, a locked region, the weekly boss, your counts over time, or Settings)</li>
   <li><code>purchase_result</code>: the result of a purchase (success, cancelled, pending or failed)</li>
@@ -190,7 +194,7 @@ and it does not ask for tracking permission (App Tracking Transparency).</p>
 
 <h4>What is never sent</h4>
 <ul>
-  <li>The exercise, reps, seconds, win or loss, or whether you finished exercising</li>
+  <li>The details of each fight (exercise, reps, seconds, win or loss, whether you kept going to the end)</li>
   <li>GOLD, gear, foes felled, level, title, streak, or whether you show on the ranking</li>
   <li>The name you entered, your answers to the questions, or your reminder time</li>
   <li>Your real name, contact details or other personal information</li>
@@ -199,34 +203,39 @@ and it does not ask for tracking permission (App Tracking Transparency).</p>
 <p>The purpose is to count how far people get and where they stop, so we can fix what is hard to use. The data is not used for ad delivery or targeting.</p>
 <p>The recipient is Google LLC, which handles the data under the Firebase data processing terms. See
 <a href="https://firebase.google.com/support/privacy">Firebase Privacy and Security</a>.</p>
-<p>Nothing is sent if your App Store storefront is in the EEA (European Economic Area), the United Kingdom or Switzerland, and the consent screen is not shown there.
+<p>Nothing is sent if your App Store storefront is in the EEA (European Economic Area), the United Kingdom or Switzerland.
 Nothing is sent if the App cannot determine your App Store storefront.</p>
 
 <h4>Turning it off and retention</h4>
 <ul>
-  <li>Turn off “Send usage data” in the App's Settings and nothing more is sent. The app installation identifier on your device is also reset.</li>
-  <li>Data already sent is deleted when the Google Analytics data retention period (2 months) has passed. Turning it off does not delete data already sent at that moment.</li>
-  <li>If you delete the App, data already sent is likewise deleted when the retention period has passed.</li>
+  <li>Turn off “Send usage data” in the App's Settings and nothing more is sent. The app installation identifier on your device is also reset, so any later data is not linked to earlier data.</li>
+  <li>Individual records already sent (event-level and user-level data) are deleted when the Google Analytics data retention period (2 months) has passed. Aggregated counts that do not identify anyone (such as numbers of users or events) remain in reports.</li>
+  <li>Turning it off or deleting the App does not delete data already sent at that moment.</li>
+  <li>The App does not show its installation identifier, and the developer cannot tell whose records are whose, so records already sent cannot be looked up and deleted individually.</li>
 </ul>
 
 <h3>4. Ranking (Game Center)</h3>
-<p>“Show on the ranking” is off at first. <strong>Only if you turn it on</strong> does the App sign in to Apple's Game Center and send the following
-when you close a fight result, change your title, and so on:</p>
+<p>The ranking uses Apple's Game Center. When you open the ranking screen, the App asks you to sign in to Game Center (signing in is needed even just to view the ranking).
+The App signs in to Game Center only when you open the ranking screen or while “Show on the ranking” is on.</p>
+<p>“Show on the ranking” is off at first. <strong>Records are sent only if you turn it on.</strong>
+While it is on and you are signed in to Game Center, the App sends the following when you close a fight result, change your gear or title, and so on:</p>
 <ul>
   <li>Your streak (the number of days in a row you fought)</li>
   <li>The gear you wear (6 slots), your title, foes felled (in units of 100) and the number of region bosses you defeated (your level is worked out from foes felled)</li>
 </ul>
 <p>When shown, your Game Center nickname and the records above are visible to other Game Center players on the ranking and on your profile.
 The name you entered in the App is never shown.</p>
-<p>Once you turn it off, nothing more is sent. The ranking starts over every Monday, so records already on it stop appearing from the next Monday.</p>
-<p>Viewing the ranking also requires signing in to Game Center. Game Center is a service run by Apple, and
+<p>Once you turn it off, nothing more is sent. The ranking starts over every Monday at 0:00 Japan time (Sunday 15:00 UTC), so records already on it do not appear on the next week's ranking.</p>
+<p>Game Center is a service run by Apple, and
 <a href="https://www.apple.com/legal/privacy/">Apple's Privacy Policy</a> applies to signing in and to how the records are handled.
 Data sent to Game Center is not sent to Firebase Analytics.</p>
 
 <h3>5. Purchases</h3>
 <p>Membership (yearly and monthly) and Lifetime are bought and restored through Apple's App Store (StoreKit).
 Neither the App nor the developer ever receives your card number or other payment details, or your Apple Account password.
-Your purchase state is checked on your device from Apple's transaction data.</p>
+Your purchase state is checked on your device from Apple's transaction data.
+To do this, the App asks the App Store for your purchase state, auto-renewal status and product prices when it starts and when you return to it.
+The App also reads your App Store storefront (country) to check whether usage data may be sent from your region. This check happens on your device, and the storefront is never sent to the developer.</p>
 
 <h3>6. Reminders (notifications)</h3>
 <p>The daily reminder and the reminder before a free trial ends are local notifications scheduled on your device. Nothing is sent from a server.
@@ -246,7 +255,8 @@ The values are used on your device for that check only and are neither stored no
 <p>If this policy changes, this page will be updated along with its effective date.</p>
 
 <h3>11. Contact</h3>
-<p>For questions about this policy or requests to delete data already sent, please use GitHub Issues.
+<p>For questions about this policy, please use GitHub Issues.
+As explained in section 3, usage data already sent cannot be looked up and deleted individually, so to stop sending it, turn it off in the App's Settings.
 Issues are public and anyone can read them, so please do not include your name, email address or other personal information.</p>
 <p><a class="cta" href="https://github.com/TodaMasao/tobatsu-legal/issues/new">Ask a question / report an issue (GitHub Issues)</a></p>
 </section>
