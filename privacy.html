@@ -37,7 +37,7 @@
 
 <section lang="ja">
 <h2>日本語</h2>
-<p class="muted">施行日: 2026年9月27日</p>
+<p class="muted">施行日: 2026年9月28日</p>
 
 <h3>1. 基本方針</h3>
 <p>1分筋トレ討伐（以下「本アプリ」）には、アカウント登録も開発者のサーバーもありません。氏名・メールアドレス・電話番号など、あなたを直接特定できる情報を求めません。</p>
@@ -59,7 +59,7 @@
 <p>これらは端末の中（SwiftData と UserDefaults）にだけ保存し、開発者は見られません。ただし、「ランキングに公開する」をオンにした場合は、進み具合のうち下記「4」の記録を Game Center に送ります。本アプリは iCloud への同期をしません。本アプリを iPhone から削除すると、すべて消えます。iPhone 全体のバックアップ（iCloud バックアップ、またはパソコンへのバックアップ）を使っている場合は、そのバックアップに含まれます。</p>
 
 <h3>3. 使い方の記録（Firebase Analytics）</h3>
-<p>初めて起動した時に「使い方の記録を送りますか」と聞きます。<strong>「送る」を選んだ場合にだけ</strong>、Google の分析サービス Firebase Analytics（Google アナリティクス for Firebase）へ使い方の記録を送ります。「送らない」を選んだ場合は送りません。どちらを選んでも、使える機能は変わりません。</p>
+<p>初めて起動した時に「使い方の記録を送りますか」と聞きます（EEA（欧州経済領域）・英国・スイスの App Store をお使いの場合と、App Store の地域を確かめられない場合は聞きません）。<strong>「送る」を選んだ場合にだけ</strong>、Google の分析サービス Firebase Analytics（Google アナリティクス for Firebase）へ使い方の記録を送ります。「送らない」を選んだ場合は送りません。どちらを選んでも、使える機能は変わりません。</p>
 <p>同意するまで、本アプリは Firebase を起動しません。使っているのは広告の識別子（IDFA）を読まない版（FirebaseAnalyticsCore）で、トラッキングの許可（App Tracking Transparency）も求めません。</p>
 
 <h4>本アプリが送る記録</h4>
@@ -76,10 +76,10 @@
 
 <h4>Google が自動で記録するもの</h4>
 <ul>
-  <li>初回の起動（同意した時点を指します）・起動と利用時間・表示した画面・アプリと OS の更新・App 内課金</li>
-  <li>機種・OS のバージョン・アプリのバージョン・言語</li>
+  <li>初回の起動（同意した後に送ります。設定の「使い方の記録を送る」をオフからオンに戻した時にも、もう一度送ります）・起動と利用時間・表示した画面・アプリと OS の更新・App 内課金</li>
+  <li>機種・OS のバージョン・アプリのバージョンとビルド番号・言語・時差（UTC からのずれ）・Firebase のライブラリのバージョン</li>
   <li>IP アドレスから推定したおおよその地域（国・地域・都市）</li>
-  <li>アプリごとのランダムな識別子</li>
+  <li>アプリごとのランダムな識別子（Firebase のアプリのインスタンス ID とインストール ID）。広告の識別子（IDFA）と、同じ開発者のアプリで共通の識別子（IDFV）は送りません</li>
 </ul>
 
 <h4>送らないもの</h4>
@@ -96,7 +96,8 @@
 
 <h4>止め方と保持期間</h4>
 <ul>
-  <li>本アプリの設定の「使い方の記録を送る」をオフにすると、それ以降は送りません。端末の中のアプリごとの識別子も作り直すため、それ以降の記録は前の記録と結びつきません。</li>
+  <li>本アプリの設定の「使い方の記録を送る」をオフにすると、それ以降は送りません。端末の中のアプリごとの識別子（アプリのインスタンス ID とインストール ID）も作り直すため、それ以降の記録は前の記録と結びつきません。</li>
+  <li>Firebase は、識別子や初回の起動の回数などを、本アプリを削除しても消えない場所（キーチェーンなど）に保存することがあります。</li>
   <li>送信済みの記録のうち、1件ごとの記録（イベント単位・利用者単位のデータ）は、Google アナリティクスのデータ保持期間（2か月）が過ぎると消えます。個人を特定しない集計の数（人数・回数など）は、レポートに残ります。</li>
   <li>オフにしても、本アプリを削除しても、送信済みの分がその時点で消えるわけではありません。</li>
   <li>本アプリはアプリごとの識別子を画面に表示せず、開発者は記録がどなたのものか分からないため、送信済みの記録を個別に探して消すことはできません。</li>
@@ -114,7 +115,7 @@
 <p>Game Center は Apple が運営するサービスで、サインインと記録の扱いには <a href="https://www.apple.com/legal/privacy/">Apple のプライバシーポリシー</a>が適用されます。Game Center に送る記録は、Firebase Analytics には送りません。</p>
 
 <h3>5. 購入</h3>
-<p>会員（年額・月額）と永久版の購入・復元は、Apple の App Store（StoreKit）で行います。本アプリと開発者が、カード番号などの支払いの情報や Apple Account のパスワードを受け取ることはありません。購入の状態は、Apple の取引の情報をもとに端末の中で確かめます。そのために、起動した時と本アプリに戻った時に、購入の状態・自動更新の状態・商品の価格を App Store に問い合わせます。また、App Store の地域（国）を、使い方の記録を送ってよい地域かどうかを確かめるために読みます（判定は端末の中で行い、地域の情報を開発者に送ることはありません）。</p>
+<p>会員（年額・月額）と永久版の購入・復元は、Apple の App Store（StoreKit）で行います。本アプリと開発者が、カード番号などの支払いの情報や Apple アカウントのパスワードを受け取ることはありません。購入の状態は、Apple の取引の情報をもとに端末の中で確かめます。そのために、起動した時と本アプリに戻った時に、購入の状態・自動更新の状態・商品の価格を App Store に問い合わせます。また、App Store の地域（国）を、使い方の記録を送ってよい地域かどうかを確かめるために読みます（判定は端末の中で行い、地域の情報を開発者に送ることはありません）。</p>
 
 <h3>6. お知らせ（通知）</h3>
 <p>毎日のお知らせと、無料体験が終わる前のお知らせは、端末の中で予約するローカル通知です。サーバーからは送りません。通知の許可は、お知らせについての説明の画面の後にだけ求めます。許可しなくても使えます。</p>
@@ -139,7 +140,7 @@
 <hr>
 <section lang="en">
 <h2>English</h2>
-<p class="muted">Effective date: September 27, 2026</p>
+<p class="muted">Effective date: September 28, 2026</p>
 
 <h3>1. Overview</h3>
 <p>Tobatsu (“the App”) has no account registration and no server of its own.
@@ -154,7 +155,7 @@ It never asks for information that directly identifies you, such as your name, e
 <h3>2. What is stored on your device</h3>
 <ul>
   <li>Your fight records (date, exercise, reps counted, plank seconds, whether you won)</li>
-  <li>Your progress (regions and stages, GOLD, gear, foes felled, level, title, streak)</li>
+  <li>Your progress (regions and stages, GOLD, gear, foes defeated, level, title, streak)</li>
   <li>The name you entered in the App and your answers to the first questions</li>
   <li>Your settings (reminder time, sound, push-up form and so on)</li>
   <li>Your purchase state</li>
@@ -166,7 +167,7 @@ Everything is deleted when you remove the App from your iPhone.
 If you use a full device backup (iCloud Backup or a backup to a computer), this data is included in that backup.</p>
 
 <h3>3. Usage data (Firebase Analytics)</h3>
-<p>On first launch the App asks “Send usage data?”. <strong>Only if you choose “Send”</strong> does it send usage data to
+<p>On first launch the App asks “Send usage data?”, unless your App Store storefront is in the EEA, the United Kingdom or Switzerland, or the App cannot determine your storefront. <strong>Only if you choose “Send”</strong> does it send usage data to
 Google's analytics service, Firebase Analytics (Google Analytics for Firebase). If you choose “Don't send”, nothing is sent.
 Your choice does not change which features you can use.</p>
 <p>The App does not start Firebase until you agree. It uses the edition that does not read the advertising identifier (FirebaseAnalyticsCore),
@@ -186,16 +187,16 @@ and it does not ask for tracking permission (App Tracking Transparency).</p>
 
 <h4>What Google records automatically</h4>
 <ul>
-  <li>First open (meaning the moment you agreed), app opens and time in the app, screens viewed, app and OS updates, in-app purchases</li>
-  <li>Device model, OS version, app version and language</li>
+  <li>First open (sent after you agree, and sent again when you turn “Send usage data” in Settings back on after turning it off), app opens and time in the app, screens viewed, app and OS updates, in-app purchases</li>
+  <li>Device model, OS version, app version and build number, language, time zone offset from UTC, and the Firebase library version</li>
   <li>Approximate location estimated from your IP address (country, region and city)</li>
-  <li>A random identifier for this app installation</li>
+  <li>Random identifiers for this app installation (the Firebase app instance ID and installation ID). The advertising identifier (IDFA) and the identifier shared by apps from the same developer (IDFV) are not sent</li>
 </ul>
 
 <h4>What is never sent</h4>
 <ul>
   <li>The details of each fight (exercise, reps, seconds, win or loss, whether you kept going to the end)</li>
-  <li>GOLD, gear, foes felled, level, title, streak, or whether you show on the ranking</li>
+  <li>GOLD, gear, foes defeated, level, title, streak, or whether you show on the ranking</li>
   <li>The name you entered, your answers to the questions, or your reminder time</li>
   <li>Your real name, contact details or other personal information</li>
 </ul>
@@ -208,7 +209,8 @@ Nothing is sent if the App cannot determine your App Store storefront.</p>
 
 <h4>Turning it off and retention</h4>
 <ul>
-  <li>Turn off “Send usage data” in the App's Settings and nothing more is sent. The app installation identifier on your device is also reset, so any later data is not linked to earlier data.</li>
+  <li>Turn off “Send usage data” in the App's Settings and nothing more is sent. The app installation identifiers on your device (the app instance ID and the installation ID) are also reset, so any later data is not linked to earlier data.</li>
+  <li>Firebase may store identifiers and records such as the number of first opens in a place on the device that is not cleared when you delete the App (such as the keychain).</li>
   <li>Individual records already sent (event-level and user-level data) are deleted when the Google Analytics data retention period (2 months) has passed. Aggregated counts that do not identify anyone (such as numbers of users or events) remain in reports.</li>
   <li>Turning it off or deleting the App does not delete data already sent at that moment.</li>
   <li>The App does not show its installation identifier, and the developer cannot tell whose records are whose, so records already sent cannot be looked up and deleted individually.</li>
@@ -221,7 +223,7 @@ The App signs in to Game Center only when you open the ranking screen or while �
 While it is on and you are signed in to Game Center, the App sends the following when you close a fight result, change your gear or title, and so on:</p>
 <ul>
   <li>Your streak (the number of days in a row you fought)</li>
-  <li>The gear you wear (6 slots), your title, foes felled (in units of 100) and the number of region bosses you defeated (your level is worked out from foes felled)</li>
+  <li>The gear you wear (6 slots), your title, foes defeated (in units of 100) and the number of region bosses you defeated (your level is worked out from foes defeated)</li>
 </ul>
 <p>When shown, your Game Center nickname and the records above are visible to other Game Center players on the ranking and on your profile.
 The name you entered in the App is never shown.</p>
